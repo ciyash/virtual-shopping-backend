@@ -10,7 +10,7 @@ const generateSubCatUniqueId = () => {
 // Create Subcategory
 const createSubcategory = async (req, res) => {
   try {
-    const { categoryId, subCategoryName } = req.body;
+    const { categoryId,companyId, subCategoryName } = req.body;
     const image = req.file?.location;
 
     if (!image) {
@@ -22,6 +22,7 @@ const createSubcategory = async (req, res) => {
     const newSubcategory = new Subcategory({
       image,
       categoryId,
+      companyId,
       subCategoryName,
       subCatUniqueId,
     });
@@ -36,7 +37,7 @@ const createSubcategory = async (req, res) => {
 // Get all Subcategories
 const getAllSubcategories = async (req, res) => {
   try {
-    const subcategories = await Subcategory.find().populate('categoryId');
+    const subcategories = await Subcategory.find().populate('categoryId','catName');
     return res.status(200).json(subcategories);
   } catch (error) {
     return res.status(500).json({ message: error.message });

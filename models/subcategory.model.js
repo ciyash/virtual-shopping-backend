@@ -5,6 +5,7 @@ const subcategorySchema = new mongoose.Schema({
   image:{type:String,required:true},
   subCategoryName: { type: String, required: true },
   subCatStatus: { type: String, enum: [1,2,3,4,5], default:1 },
+  companyId:{type:mongoose.Types.ObjectId,ref:"Company",required:true},
   subCatUniqueId: { type: String, required: true, unique: true },
   subCategoryCreateDate: { type: Date, default: () => new Date() }
 });
