@@ -36,7 +36,7 @@ const createCategory = async (req, res) => {
 const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.find().sort({ categoryCreateDate: -1 });
-    res.status(200).json({data: categories });
+    res.status(200).json(categories);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

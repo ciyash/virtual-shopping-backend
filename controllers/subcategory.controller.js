@@ -46,7 +46,7 @@ const getSubcategoryById = async (req, res) => {
   try {
     const subcategory = await Subcategory.findById(req.params.id).populate('categoryId');
     if (!subcategory) return res.status(404).json({ success: false, message: 'Subcategory not found' });
-    res.status(200).json({ message: 'Subcategory fetched successfully', data: subcategory });
+    res.status(200).json(subcategory);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

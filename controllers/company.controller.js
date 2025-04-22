@@ -11,7 +11,6 @@ const createCompany = async (req, res) => {
       offerName,
       startDate,
       endDate,
-      status
     } = req.body;
 
     const image = req.file?.location;
@@ -20,7 +19,7 @@ const createCompany = async (req, res) => {
     }
 
     const newCompany = new Company({
-        countryId,
+       countryId,
       companyName,
       image,
       companyType,
@@ -28,7 +27,6 @@ const createCompany = async (req, res) => {
       offerName,
       startDate,
       endDate,
-      status
     });
 
     await newCompany.save();

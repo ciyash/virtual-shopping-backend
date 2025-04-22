@@ -9,7 +9,7 @@ const companySchema = new mongoose.Schema({
   offerName: { type: String },
   startDate: { type: Date },
   endDate: { type: Date },
-  status: { type: String, enum: ["Active", "Inactive"], default: "Active" },
+  companyStatus: { type: String, enum: [1,2,3,4,5], default: 1 },
   createCompanyDate: { type: Date, default: () => new Date() }
 });
 

@@ -10,6 +10,7 @@ import subCategoryRouter from '../routers/subcategory.router.js'
 import productRouter from '../routers/product.router.js'
 import feedbackRouter from '../routers/feedback.router.js'
 import contactRouter from '../routers/contact.router.js'
+import companyCategory from '../routers/company.category.router.js'
 
 const app=express()
 
@@ -24,5 +25,6 @@ app.use("/sub-category",subCategoryRouter)
 app.use("/product",productRouter)
 app.use("/feedback",feedbackRouter)
 app.use("/contact",contactRouter)
+app.use("/company-category",companyCategory)
 
 export default app
