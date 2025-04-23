@@ -10,7 +10,7 @@ const generateSubCatUniqueId = () => {
 // Create Subcategory
 const createSubcategory = async (req, res) => {
   try {
-    const { categoryId,companyId, subCategoryName } = req.body;
+    const { categoryId, subCategoryName } = req.body;
     const image = req.file?.location;
 
     if (!image) {
@@ -22,7 +22,6 @@ const createSubcategory = async (req, res) => {
     const newSubcategory = new Subcategory({
       image,
       categoryId,
-      companyId,
       subCategoryName,
       subCatUniqueId,
     });

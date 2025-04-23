@@ -20,6 +20,7 @@ const createCompanyCategory = async (req, res) => {
     const {
       companyId,
       categoryId,
+      subcategoryId,
       url,
       offer,
       offerstatus,
@@ -38,6 +39,7 @@ const createCompanyCategory = async (req, res) => {
       companycatUniqueid,
       companyId,
       categoryId,
+      subcategoryId,
       url,
       offer,
       offerstatus,

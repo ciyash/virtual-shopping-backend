@@ -8,7 +8,7 @@ dotenv.config();
 // Signup
 const signupUser = async (req, res) => {
   try {
-    const { name, email, userName, phone, password } = req.body;
+    const { name, email, password } = req.body;
 
     const existingUser = await User.findOne({ $or: [{ email }, { phone }, { userName }] });
     if (existingUser) {
@@ -20,8 +20,6 @@ const signupUser = async (req, res) => {
     const newUser = new User({
       name,
       email,
-      userName,
-      phone,
       password: hashedPassword
     });
 
@@ -35,15 +33,9 @@ const signupUser = async (req, res) => {
 // Login
 const loginUser = async (req, res) => {
   try {
-    const { identifier, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({
-      $or: [
-        { email: identifier },
-        { phone: identifier },
-        { userName: identifier }
-      ]
-    }).select('+password');
+    const user = await User.findOne({email}).select('+password');
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
