@@ -18,4 +18,6 @@ router.delete('/:id', productController.deleteProduct);
 
 router.get('/subcategoryId/:subcategoryId',productController.getProductBySubcategory)
 
+router.get('/companyId/:companyId',productController.getProductByCompanyId)
+
 export default router;

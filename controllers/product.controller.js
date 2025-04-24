@@ -99,6 +99,22 @@ const getProductBySubcategory = async (req, res) => {
   }
 };
 
+const getProductByCompanyId = async (req, res) => {
+  try {
+    const {companyId} =req.params
+    const product = await Product.find({companyId})
+      .populate('companyId','companyName')
+      .populate('categoryId','catName')
+      .populate('subcategoryId','subCategoryName');
+
+    if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 
 
 // Update product
@@ -129,5 +145,6 @@ export default{
     getProductById,
     updateProduct,
     deleteProduct,
-    getProductBySubcategory
+    getProductBySubcategory,
+    getProductByCompanyId
 }
