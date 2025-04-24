@@ -4,7 +4,7 @@ import getUpload from '../config/aws.upload.js'
 
 const router = express.Router();
 
-
+  
 const uploadImage = getUpload('subcategory');
 
 router.post('/create', uploadImage.single('image'),subcategoryController.createSubcategory);

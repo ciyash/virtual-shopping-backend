@@ -16,4 +16,6 @@ router.patch('/:id', uploadImage.single('image'), productController.updateProduc
 
 router.delete('/:id', productController.deleteProduct); 
 
+router.get('/subcategoryId/:subcategoryId',productController.getProductBySubcategory)
+
 export default router;

@@ -20,6 +20,7 @@ const generateProductUniqueId = async () => {
       subcategoryId,
       price,
       offerprice,
+      url,
       description
     } = req.body;
 
@@ -39,6 +40,7 @@ const generateProductUniqueId = async () => {
       subcategoryId,
       price,
       offerprice,
+      url,
       productUniqueId,
       description
     });
@@ -80,6 +82,25 @@ const generateProductUniqueId = async () => {
   }
 };
 
+
+const getProductBySubcategory = async (req, res) => {
+  try {
+    const {subcategoryId} =req.params
+    const product = await Product.find({subcategoryId})
+      .populate('companyId','companyName')
+      .populate('categoryId','catName')
+      .populate('subcategoryId','subCategoryName');
+
+    if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+
 // Update product
  const updateProduct = async (req, res) => {
   try {
@@ -107,5 +128,6 @@ export default{
     getAllProducts,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductBySubcategory
 }
