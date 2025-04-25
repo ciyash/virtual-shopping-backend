@@ -7,6 +7,7 @@ const createCompany = async (req, res) => {
       countryId,
       companyName,
       companyType,
+      companyUrl,
       description,
       offerName,
       startDate,
@@ -23,12 +24,13 @@ const createCompany = async (req, res) => {
       companyName,
       image,
       companyType,
+      companyUrl,
       description,
       offerName,
       startDate,
       endDate,
     });
-
+  
     await newCompany.save();
     res.status(201).json({ message: 'Company created', data: newCompany });
   } catch (err) {
@@ -62,9 +64,10 @@ const getCompanyById = async (req, res) => {
 const updateCompany = async (req, res) => {
   try {
     const {
-        countryId,
+      countryId,
       companyName,
       companyType,
+      companyUrl,
       description,
       offerName,
       startDate,
@@ -78,6 +81,7 @@ const updateCompany = async (req, res) => {
         countryId,
       companyName,
       companyType,
+      companyUrl,
       description,
       offerName,
       startDate,

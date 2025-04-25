@@ -20,7 +20,7 @@ const generateProductUniqueId = async () => {
       subcategoryId,
       price,
       offerprice,
-      url,
+      productUrl,
       description
     } = req.body;
 
@@ -40,7 +40,7 @@ const generateProductUniqueId = async () => {
       subcategoryId,
       price,
       offerprice,
-      url,
+      productUrl,
       productUniqueId,
       description
     });

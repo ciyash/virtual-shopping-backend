@@ -11,6 +11,7 @@ import productRouter from '../routers/product.router.js'
 import feedbackRouter from '../routers/feedback.router.js'
 import contactRouter from '../routers/contact.router.js'
 import companyCategory from '../routers/company.category.router.js'
+import bannersRouter from '../routers/banners.router.js'
 
 const app=express()
 
@@ -26,5 +27,6 @@ app.use("/product",productRouter)
 app.use("/feedback",feedbackRouter)
 app.use("/contact",contactRouter)
 app.use("/company-category",companyCategory)
+app.use("/banners",bannersRouter)
 
 export default app
