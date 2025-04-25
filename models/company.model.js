@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const companySchema = new mongoose.Schema({
   countryId:{type:mongoose.Schema.Types.ObjectId,ref:"Country",required:true},
+  trending:{type:String,enum:["yes","no"],default:"no"},
   companyName: { type: String, required: true },
   companyUrl:{type:String,required:true},
   image: { type: String,required:true},
