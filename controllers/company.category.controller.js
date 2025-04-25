@@ -19,9 +19,7 @@ const createCompanyCategory = async (req, res) => {
   try {
     const {
       companyId,
-      categoryId,
-      subcategoryId,
-      url,
+       url,
       offer,
       offerstatus,
       startdate,
@@ -38,8 +36,6 @@ const createCompanyCategory = async (req, res) => {
     const newCompanyCategory = await CompanyCategory.create({
       companycatUniqueid,
       companyId,
-      categoryId,
-      subcategoryId,
       url,
       offer,
       offerstatus,

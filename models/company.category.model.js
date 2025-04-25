@@ -5,8 +5,6 @@ const companyCategorySchema = new mongoose.Schema({
   companycatUniqueid: { type: String, required: true},
   companycatStatus: { type: String, enum:[1,2,3,4,5],default:1},
   companyId: { type: mongoose.Schema.Types.ObjectId, ref: "Company", required: true },
-  categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
-  subcategoryId:{type:mongoose.Schema.Types.ObjectId,ref:"Subcategory",required:true},
   url: { type: String,required:true },
   offer: { type: String },
   offerstatus: { type: String },

@@ -14,6 +14,7 @@ const generateProductUniqueId = async () => {
  const createProduct = async (req, res) => {
   try {
     const {
+      topDeals,
       productName,
       companyId,
       categoryId,
@@ -33,6 +34,7 @@ const generateProductUniqueId = async () => {
     const productUniqueId = await generateProductUniqueId();
 
     const newProduct = new Product({
+      topDeals,
       productName,
       image,
       companyId,
