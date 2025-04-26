@@ -141,6 +141,22 @@ const getProductByCompanyId = async (req, res) => {
   }
 };
 
+const getTopDealsProducts = async (req, res) => {
+  try {
+    const topDealsProducts = await Product.find({ topDeals: "yes" })
+      .populate("companyId", "companyName")
+      .populate("categoryId", "catName")
+      .populate("subcategoryId", "subCategoryName")
+      .sort({ createdProductDate: -1 });
+
+    res.status(200).json(topDealsProducts);
+  } catch (error) {
+    console.error("Error getting top deals products:", error);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+};
+
+
 export default{
     createProduct,
     getAllProducts,
@@ -148,5 +164,6 @@ export default{
     updateProduct,
     deleteProduct,
     getProductBySubcategory,
-    getProductByCompanyId
+    getProductByCompanyId,
+    getTopDealsProducts
 }

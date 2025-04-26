@@ -8,13 +8,12 @@ const generateCountryUniqueId = () => counter++;
 
 const createCountry = async (req, res) => {
     try {
-        const { countryName, weight, perKgPrice } = req.body;
+        const { countryName,currency} = req.body;
 
         const newCountry = new Country({
             countryUniqueId: generateCountryUniqueId(), 
             countryName,
-            weight,
-            perKgPrice,
+            currency
         });
 
         const savedCountry = await newCountry.save();

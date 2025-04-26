@@ -70,6 +70,7 @@ const updateCompany = async (req, res) => {
   try {
     const {
       countryId,
+      trending,
       companyName,
       companyType,
       companyUrl,
@@ -105,7 +106,10 @@ const updateCompany = async (req, res) => {
 
     res.status(200).json({ message: "Company updated", data: updated });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    // res.status(500).json({error: error.message});
+    res.status(500).json({ error: error.message });
+
+
   }
 };
 

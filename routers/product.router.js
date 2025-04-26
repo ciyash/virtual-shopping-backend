@@ -10,6 +10,8 @@ router.post('/create', uploadImage.single('image'), productController.createProd
 
 router.get('/get', productController.getAllProducts); 
 
+router.get("/top-deals",productController.getTopDealsProducts);
+
 router.get('/:id', productController.getProductById); 
 
 router.patch('/:id', uploadImage.single('image'), productController.updateProduct); 
@@ -19,5 +21,7 @@ router.delete('/:id', productController.deleteProduct);
 router.get('/subcategoryId/:subcategoryId',productController.getProductBySubcategory)
 
 router.get('/companyId/:companyId',productController.getProductByCompanyId)
+
+
 
 export default router;
