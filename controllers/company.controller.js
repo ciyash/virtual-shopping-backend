@@ -125,10 +125,25 @@ const deleteCompany = async (req, res) => {
   }
 };
 
+const getTrendingCompanies = async (req, res) => {
+  try {
+    const trendingCompanies = await Company.find({ trending: "yes" })
+      .populate("countryId", "countryName") 
+      .sort({ createCompanyDate: -1 }); 
+
+    res.status(200).json(trendingCompanies);
+  } catch (error) {
+    console.error("Error fetching trending companies:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export default {
   createCompany,
   getAllCompanies,
   getCompanyById,
   updateCompany,
   deleteCompany,
+  getTrendingCompanies
+  
 };
