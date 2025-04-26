@@ -1,6 +1,6 @@
 import Address from "../models/address.model.js";
 
-// ✅ Create Address
+
 const createAddress = async (req, res) => {
   try {
     const { houseNo, address, city, state, pincode } = req.body;
@@ -29,7 +29,7 @@ const createAddress = async (req, res) => {
   }
 };
 
-// ✅ Get All Addresses for Admin
+
 const getAllAddresses = async (req, res) => {
   try {
    
@@ -77,7 +77,7 @@ const updateAddress = async (req, res) => {
   
   
 
-//  Delete Address
+//  Delete //
 const deleteAddress = async (req, res) => {
   try {
     const { id } = req.params;

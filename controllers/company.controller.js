@@ -1,6 +1,5 @@
 import Company from "../models/company.model.js";
 
-// CREATE
 const createCompany = async (req, res) => {
   try {
     const {
@@ -144,6 +143,5 @@ export default {
   getCompanyById,
   updateCompany,
   deleteCompany,
-  getTrendingCompanies
-  
+  getTrendingCompanies 
 };
