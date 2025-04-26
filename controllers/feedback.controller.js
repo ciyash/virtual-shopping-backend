@@ -2,7 +2,7 @@ import Feedback from "../models/feedback.model.js";
 
 const createFeedback = async (req, res) => {
   try {
-    const { name, email, phone, rating, description } = req.body;
+    const { name, email,title, rating, description } = req.body;
 
     const userId = req.user?.id || req.body.userId; 
 
@@ -10,7 +10,7 @@ const createFeedback = async (req, res) => {
       userId,
       name,
       email,
-      phone,
+      title,
       rating,
       description
     });

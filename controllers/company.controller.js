@@ -43,7 +43,10 @@ const createCompany = async (req, res) => {
 // GET ALL
 const getAllCompanies = async (req, res) => {
   try {
-    const companies = await Company.find().sort({ createCompanyDate: -1 });
+    const companies = await Company.find()
+    if(!companies){
+      return res.status(500).json({message:"No companies !"})
+    }
     res.status(200).json(companies);
   } catch (err) {
     res.status(500).json({ message: "Server error" });

@@ -143,7 +143,7 @@ const getProductByCompanyId = async (req, res) => {
 
 const getTopDealsProducts = async (req, res) => {
   try {
-    const topDealsProducts = await Product.find({ topDeals: "yes" })
+    const topDealsProducts = await Product.find({ topDeals: "yes" }).sort({ createdAt: -1 })
       .populate("companyId", "companyName")
       .populate("categoryId", "catName")
       .populate("subcategoryId", "subCategoryName")
