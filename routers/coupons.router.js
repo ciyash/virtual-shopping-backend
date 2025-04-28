@@ -1,11 +1,12 @@
 import express from 'express';
 import { createCoupon, getAllCoupons, getCouponById, deleteCouponById } from '../controllers/coupons.controller.js';
-import upload from '../config/multer.js';  // Import the multer upload setup
+import upload from '../config/multer.js';  
+import authMiddleware from '../config/jwt.middleware.js';
 
 const router = express.Router();
 
 
-router.post('/create', upload.single('image'), createCoupon);
+router.post('/create', authMiddleware,upload.single('image'), createCoupon);
 
 // Route to get all coupons
 router.get('/', getAllCoupons);
@@ -14,6 +15,6 @@ router.get('/', getAllCoupons);
 router.get('/:id', getCouponById);
 
 // Route to delete coupon by ID
-router.delete('/:id', deleteCouponById);
+router.delete('/:id',authMiddleware,deleteCouponById);
 
 export default router;

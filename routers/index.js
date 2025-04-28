@@ -1,4 +1,5 @@
 import express from 'express'
+import adminRouter from '../routers/admin.router.js'
 import userRouter from './user.route.js'
 import addressRouter from '../routers/address.router.js'
 import cartRouter from '../routers/cart.router.js'
@@ -15,7 +16,7 @@ import bannersRouter from '../routers/banners.router.js'
 import logoRouter from '../routers/logo.router.js'
 
 const app=express()
-
+app.use("/admin",adminRouter)
 app.use("/user",userRouter)
 app.use("/address",addressRouter)
 app.use("/cart",cartRouter)
@@ -30,5 +31,6 @@ app.use("/contact",contactRouter)
 app.use("/company-category",companyCategory)
 app.use("/banners",bannersRouter)
 app.use("/logo",logoRouter)
+
 
 export default app

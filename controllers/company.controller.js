@@ -127,18 +127,60 @@ const deleteCompany = async (req, res) => {
   }
 };
 
-const getTrendingCompanies = async (req, res) => {
+const getTopDealsCompanies = async (req, res) => {
   try {
-    const trendingCompanies = await Company.find({ trending: "yes" })
-      .populate("countryId", "countryName") 
-      .sort({ createCompanyDate: -1 }); 
-
-    res.status(200).json(trendingCompanies);
+    const companies = await Company.find({ dealType: "topdeals" }).sort({ createCompanyDate: 1 }); 
+    if (companies.length === 0) {
+      return res.status(200).json({ message: "No data found" });
+    }
+    res.status(200).json(companies);
   } catch (error) {
     console.error("Error fetching trending companies:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+const getTrendingCompanies = async (req, res) => {
+  try {
+    const companies = await Company.find({ dealType: "trending" }).sort({ createCompanyDate: -1 }); 
+    if (companies.length === 0) {
+      return res.status(200).json({ message: "No data found" });
+    }
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching trending companies:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const getFreeShippedCompanies = async (req, res) => {
+  try {
+    const companies = await Company.find({ dealType: "freeshipped" }).sort({ createCompanyDate: 1 }); 
+    if (companies.length === 0) {
+      return res.status(200).json({ message: "No data found" });
+    }
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching free-shipped companies:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const getMemberExclusivesCompanies = async (req, res) => {
+  try {
+    const companies = await Company.find({ dealType: "memberexclusives" }).sort({ createCompanyDate: -1 }); 
+    if (companies.length === 0) {
+      return res.status(200).json({ message: "No data found" });
+    }
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error("Error fetching member-exclusive companies:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+
 
 export default {
   createCompany,
@@ -146,5 +188,9 @@ export default {
   getCompanyById,
   updateCompany,
   deleteCompany,
-  getTrendingCompanies 
+
+  getTopDealsCompanies,
+  getTrendingCompanies,
+  getFreeShippedCompanies,
+  getMemberExclusivesCompanies 
 };

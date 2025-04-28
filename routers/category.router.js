@@ -1,9 +1,9 @@
 import express from 'express';
 import categoryController from '../controllers/category.controller.js';
-
+import authMiddleware from '../config/jwt.middleware.js'
 const router = express.Router();
 
-router.post('/create', categoryController.createCategory);
+router.post('/create', authMiddleware,categoryController.createCategory);
 router.get('/get', categoryController.getAllCategories);
 router.get('/:id', categoryController.getCategoryById);
 router.patch('/:id', categoryController.updateCategory);

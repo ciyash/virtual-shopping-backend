@@ -12,6 +12,6 @@ router.get("/user-address",authMiddleware,addressController.getAddressByUserId)
 
 router.patch("/update/:id",authMiddleware,addressController.updateAddress);
 
-router.delete("/", authMiddleware, addressController.deleteAddress);
+router.delete("/:id",  addressController.deleteAddress);
 
 export default router;
