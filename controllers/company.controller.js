@@ -4,7 +4,7 @@ const createCompany = async (req, res) => {
   try {
     const {
       countryId,
-      trending,
+      dealType,
       companyName,
       companyType,
       companyUrl,
@@ -21,7 +21,7 @@ const createCompany = async (req, res) => {
 
     const newCompany = new Company({
       countryId,
-      trending,
+      dealType,
       companyName,
       image,
       companyType,
@@ -72,7 +72,7 @@ const updateCompany = async (req, res) => {
   try {
     const {
       countryId,
-      trending,
+      dealType,
       companyName,
       companyType,
       companyUrl,
@@ -87,7 +87,7 @@ const updateCompany = async (req, res) => {
 
     const updateData = {
       countryId,
-      trending,
+      dealType,
       companyName,
       companyType,
       companyUrl,
