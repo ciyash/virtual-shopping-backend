@@ -11,7 +11,7 @@ import subCategoryRouter from '../routers/subcategory.router.js'
 import productRouter from '../routers/product.router.js'
 import feedbackRouter from '../routers/feedback.router.js'
 import contactRouter from '../routers/contact.router.js'
-import companyCategory from '../routers/company.category.router.js'
+import productCategory from '../routers/product.category.router.js'
 import bannersRouter from '../routers/banners.router.js'
 import logoRouter from '../routers/logo.router.js'
 
@@ -28,7 +28,7 @@ app.use("/sub-category",subCategoryRouter)
 app.use("/product",productRouter)
 app.use("/feedback",feedbackRouter)
 app.use("/contact",contactRouter)
-app.use("/company-category",companyCategory)
+app.use("/product-category",productCategory)
 app.use("/banners",bannersRouter)
 app.use("/logo",logoRouter)
 
