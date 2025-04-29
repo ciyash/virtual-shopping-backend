@@ -77,6 +77,11 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+    // Optionally save/update IP address in DB
+    admin.ipAddress = ipAddress;
+
     const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
@@ -86,6 +91,7 @@ const login = async (req, res) => {
       token,
       admin: {
         id: admin._id,
+        ipAddress: admin.ipAddress,
         userName: admin.userName,
         email: admin.email,
         role: admin.role,
