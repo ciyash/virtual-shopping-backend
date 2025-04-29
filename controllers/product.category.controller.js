@@ -3,7 +3,7 @@ import ProductCategory from "../models/product.category.model.js";
 // Create a new product category
 const createProductCategory = async (req, res) => {
   try {
-    const { companyId, url, offer, offerstatus, startDate, endDate } = req.body;
+    const { companyId,productId, url, offer, offerstatus, startDate, endDate } = req.body;
     const image = req.file?.location;
 
     if (!image) {
@@ -12,6 +12,7 @@ const createProductCategory = async (req, res) => {
 
     const newCategory = await ProductCategory.create({
       companyId,
+      productId,
       url,
       offer,
       offerstatus,
@@ -33,7 +34,7 @@ const getAllProductCategories = async (req, res) => {
     if (!categories.length) {
       return res.status(404).json({ message: "No product categories found" });
     }
-    res.status(200).json({ data: categories });
+    res.status(200).json(categories);
   } catch (err) {
     res.status(500).json({ message: "Internal server error", error: err.message });
   }
@@ -92,10 +93,30 @@ const deleteProductCategory = async (req, res) => {
   }
 };
 
+const getProductByProductId = async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    const productCategories = await ProductCategory.find({ productId });
+
+    if (!productCategories || productCategories.length === 0) {
+      return res.status(404).json({ message: "No product categories found for this productId." });
+    }
+
+    res.status(200).json(productCategories);
+  } catch (error) {
+    console.error("Error fetching product categories:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+
 export default {
   createProductCategory,
   getAllProductCategories,
   getProductCategoryById,
   updateProductCategory,
   deleteProductCategory,
+  getProductByProductId
 };

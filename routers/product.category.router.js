@@ -11,6 +11,8 @@ router.post('/', uploadImage.single('image'),productCategoryController.createPro
 
 router.get('/', productCategoryController.getAllProductCategories);
 
+router.get('/:productId',productCategoryController.getProductByProductId)
+
 router.get('/:id', productCategoryController.getProductCategoryById);
 
 router.patch('/:id', uploadImage .single('image'), productCategoryController.updateProductCategory);

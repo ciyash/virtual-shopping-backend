@@ -10,7 +10,7 @@ const productCategorySchema = new mongoose.Schema({
   startdate: { type: Date },
   endDate: { type: Date }
 }, {
-  timestamps: true
+  timestamps: true  
 });
 
 export default mongoose.model("ProductCategory", productCategorySchema);
