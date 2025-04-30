@@ -89,13 +89,9 @@ const login = async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token,
-      admin: {
-        id: admin._id,
-        ipAddress: admin.ipAddress,
-        userName: admin.userName,
-        email: admin.email,
-        role: admin.role,
-      },
+      ipAddress: admin.ipAddress,
+      role: admin.role,
+      
     });
   } catch (error) {
     console.error("Login error:", error.message);
@@ -182,9 +178,12 @@ const getAdminById = async (req, res) => {
 // Get All Admins
 const getAllAdmins = async (req, res) => {
   try {
-    const admins = await Admin.find().select("-password -otp -otpExpires"); // exclude sensitive fields
+    const admins = await Admin.find().select("-password -otp -otpExpires");
 
-    res.status(200).json({ admins });
+    if (!admins) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+    res.status(200).json(admins);
   } catch (error) {
     console.error("Get All Admins error:", error.message);
     res.status(500).json({ message: "Server Error" });
