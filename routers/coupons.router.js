@@ -8,13 +8,11 @@ const router = express.Router();
 
 router.post('/create', authMiddleware,upload.single('image'), createCoupon);
 
-// Route to get all coupons
+
 router.get('/', getAllCoupons);
 
-// Route to get coupon by ID
 router.get('/:id', getCouponById);
 
-// Route to delete coupon by ID
 router.delete('/:id',authMiddleware,deleteCouponById);
 
 export default router;

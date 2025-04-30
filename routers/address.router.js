@@ -8,10 +8,10 @@ router.post("/", authMiddleware, addressController.createAddress);
 
 router.get("/",  addressController.getAllAddresses);
 
-router.get("/user-address",authMiddleware,addressController.getAddressByUserId)
+router.get("/user-address",addressController.getAddressByUserId)
 
 router.patch("/update/:id",authMiddleware,addressController.updateAddress);
 
-router.delete("/:id",  addressController.deleteAddress);
+router.delete("/:id",  authMiddleware,addressController.deleteAddress);
 
 export default router;
