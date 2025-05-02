@@ -1,19 +1,42 @@
-import Country from "../models/country.model.js"; 
-
+import Country from "../models/country.model.js";
 
 let counter = 1;
 
+// Optional: Consider querying DB for max ID to avoid restarting counter on server restart
 const generateCountryUniqueId = () => counter++;
-
 
 const createCountry = async (req, res) => {
     try {
-        const { countryName,currency} = req.body;
+        const {
+            countryName,
+            fuelPrice,
+            currency,
+            weight,
+            perKgPrice,
+            economyPrice,
+            expressPrice,
+            economyDays,
+            expressDays
+        } = req.body;
+
+        if (
+            !countryName || fuelPrice == null || !currency || !weight || perKgPrice == null ||
+            economyPrice == null || expressPrice == null || !economyDays || !expressDays
+        ) {
+            return res.status(400).json({ success: false, message: "All fields are required." });
+        }
 
         const newCountry = new Country({
-            countryUniqueId: generateCountryUniqueId(), 
+            countryUniqueId: generateCountryUniqueId(),
             countryName,
-            currency
+            fuelPrice,
+            currency,
+            weight,
+            perKgPrice,
+            economyPrice,
+            expressPrice,
+            economyDays,
+            expressDays
         });
 
         const savedCountry = await newCountry.save();
@@ -23,18 +46,16 @@ const createCountry = async (req, res) => {
     }
 };
 
-// Get all countries
- const getAllCountries = async (req, res) => {
+const getAllCountries = async (req, res) => {
     try {
         const countries = await Country.find();
-        res.status(200).json(countries);
+        res.status(200).json({ success: true, data: countries });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
 };
 
-// Get a country by ID
- const getCountryById = async (req, res) => {
+const getCountryById = async (req, res) => {
     try {
         const { id } = req.params;
         const country = await Country.findById(id);
@@ -49,14 +70,14 @@ const createCountry = async (req, res) => {
     }
 };
 
-// Update a country
- const updateCountry = async (req, res) => {
+const updateCountry = async (req, res) => {
     try {
         const { id } = req.params;
         const updatedData = req.body;
 
         const updatedCountry = await Country.findByIdAndUpdate(id, updatedData, {
             new: true,
+            runValidators: true
         });
 
         if (!updatedCountry) {
@@ -69,8 +90,7 @@ const createCountry = async (req, res) => {
     }
 };
 
-// Delete a country
- const deleteCountry = async (req, res) => {
+const deleteCountry = async (req, res) => {
     try {
         const { id } = req.params;
         const deletedCountry = await Country.findByIdAndDelete(id);
@@ -89,7 +109,6 @@ export default {
     createCountry,
     getAllCountries,
     getCountryById,
-    deleteCountry,
     updateCountry,
-
-}
+    deleteCountry
+};

@@ -64,13 +64,46 @@ const getSubcategoryById = async (req, res) => {
   }
 };
 
+const getSubcategoryByCategoryId = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+
+    const subcategories = await Subcategory.find({ categoryId })
+        .populate('categoryId','catName');
+
+    if (!subcategories || subcategories.length === 0) {
+      return res.status(404).json({ success: false, message: 'No subcategories found for this category' });
+    }
+
+    return res.status(200).json(subcategories);
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
 // Update Subcategory
 const updateSubcategory = async (req, res) => {
   try {
-    const updated = await Subcategory.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const { subCategoryName, categoryId } = req.body;
+    let updateData = {
+      subCategoryName,
+      categoryId,
+    };
+
+    // If an image was uploaded, include it
+    if (req.file && req.file.location) {
+      updateData.image = req.file.location; // For AWS S3 (if using multer-s3)
+    } else if (req.file) {
+      updateData.image = req.file.path; // For local uploads
+    }
+
+    const updated = await Subcategory.findByIdAndUpdate(req.params.id, updateData, { new: true });
+
     if (!updated) {
       return res.status(404).json({ success: false, message: 'Subcategory not found' });
     }
+
     return res.status(200).json({ message: 'Subcategory updated successfully', data: updated });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
@@ -95,5 +128,6 @@ export default {
   getAllSubcategories,
   getSubcategoryById,
   updateSubcategory,
-  deleteSubcategory
+  deleteSubcategory,
+  getSubcategoryByCategoryId
 };

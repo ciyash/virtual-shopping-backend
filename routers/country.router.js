@@ -4,7 +4,7 @@ import authMiddleware from "../config/jwt.middleware.js";
 
 const router = express.Router();
 
-router.post("/create", authMiddleware,countryController.createCountry);
+router.post("/create", countryController.createCountry);
 router.get("/get", countryController.getAllCountries);
 router.get("/:id", countryController.getCountryById);
 router.patch("/:id",authMiddleware,countryController.updateCountry);

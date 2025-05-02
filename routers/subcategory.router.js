@@ -5,15 +5,17 @@ import authMiddleware from '../config/jwt.middleware.js'
 const router = express.Router();
 
   
-const uploadImage = getUpload('subcategory');
+const uploadImage = getUpload('subcategory');  
 
 router.post('/create', authMiddleware,uploadImage.single('image'),subcategoryController.createSubcategory);
 
 router.get('/get',subcategoryController.getAllSubcategories);
 
+router.get('/categoryId/:categoryId',subcategoryController.getSubcategoryByCategoryId)
+
 router.get('/:id',subcategoryController.getSubcategoryById);
 
-router.patch('/:id',authMiddleware, subcategoryController.updateSubcategory);
+router.patch('/:id',authMiddleware,uploadImage.single('image'), subcategoryController.updateSubcategory);
 
 router.delete('/:id',authMiddleware, subcategoryController.deleteSubcategory);
 

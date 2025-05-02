@@ -7,7 +7,7 @@ const router = express.Router();
 
 const uploadImage = getUpload('company');
 
-router.post('/create',authMiddleware,uploadImage.single('image'), companyController.createCompany);
+router.post('/create',uploadImage.single('image'), companyController.createCompany);
 
 router.get('/get', companyController.getAllCompanies);
 
@@ -23,6 +23,6 @@ router.get('/:id', companyController.getCompanyById);
 
 router.patch('/:id',authMiddleware,uploadImage.single('image'), companyController.updateCompany);
 
-router.delete('/:id',authMiddleware,companyController.deleteCompany);
+router.delete('/:id',companyController.deleteCompany);
 
 export default router;

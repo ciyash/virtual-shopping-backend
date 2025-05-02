@@ -6,7 +6,7 @@ const router = express.Router();
 
 const uploadImage = getUpload('Product');
 
-router.post('/create' ,authMiddleware,uploadImage.single('image'), productController.createProduct); 
+router.post('/create' ,uploadImage.single('image'), productController.createProduct); 
 
 router.get('/get' ,productController.getAllProducts); 
 

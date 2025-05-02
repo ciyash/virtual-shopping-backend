@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema({
   subcategoryId: { type: mongoose.Schema.Types.ObjectId, ref: "Subcategory", required: true },
   price: { type: Number, required: true },
   offerprice: { type: Number },
-  productUrl: { type: String,default:"" },
+  productUrl: { type: String,required:true },
   productStatus: { type: String, enum: [1,2,3,4,5], default:1 },  
   productUniqueId: { type: String, required: true},
   description: { type: String },
