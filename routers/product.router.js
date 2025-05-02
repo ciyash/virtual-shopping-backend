@@ -23,5 +23,8 @@ router.get('/subcategoryId/:subcategoryId',productController.getProductBySubcate
 router.get('/companyId/:companyId',productController.getProductByCompanyId)
 
 
+router.get('/all-company-products/:companyId',productController.getProductsByCompanyWithSubcategories)
+
+
 
 export default router;

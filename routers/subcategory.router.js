@@ -19,6 +19,6 @@ router.get('/:id',subcategoryController.getSubcategoryById);
 
 router.patch('/:id',authMiddleware,uploadImage.single('image'), subcategoryController.updateSubcategory);
 
-router.delete('/:id',authMiddleware, subcategoryController.deleteSubcategory);
+router.delete('/:id', subcategoryController.deleteSubcategory);
 
 export default router;

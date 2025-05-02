@@ -1,4 +1,6 @@
 import Product from '../models/product.model.js';
+import Company from '../models/company.model.js';
+import Subcategory from '../models/subcategory.model.js';   
 
 // Generate a unique Product ID like "PROD001"
 const generateProductUniqueId = async () => {
@@ -156,6 +158,29 @@ const getTopDealsProducts = async (req, res) => {
   }
 };
 
+const getProductsByCompanyWithSubcategories = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+
+    // Step 1: Get subcategories related to this company
+    const subcategories = await Subcategory.find({ companyId }, '_id');
+    const subcategoryIds = subcategories.map((subcat) => subcat._id);
+
+    // Step 2: Get products that match companyId and subcategoryIds
+    const products = await Product.find({
+      companyId,
+      subcategoryId: { $in: subcategoryIds }
+    })
+      .populate('companyId', 'companyName')
+      .populate('categoryId', 'catName')
+      .populate('subcategoryId', 'subCategoryName');
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 
 export default{
     createProduct,
@@ -165,5 +190,6 @@ export default{
     deleteProduct,
     getProductBySubcategory,
     getProductByCompanyId,
-    getTopDealsProducts
+    getTopDealsProducts,
+    getProductsByCompanyWithSubcategories
 }
