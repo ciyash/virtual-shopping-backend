@@ -20,10 +20,10 @@ router.delete('/:id',authMiddleware,productController.deleteProduct);
 
 router.get('/subcategoryId/:subcategoryId',productController.getProductBySubcategory)
 
-router.get('/companyId/:companyId',productController.getProductByCompanyId)
+// router.get('/companyId/:companyId',productController.getProductByCompanyId)
 
 
-router.get('/all-company-products/:companyId',productController.getProductsByCompanyWithSubcategories)
+router.get('/companyId/:companyId',productController.getProductsByCompanyWithSubcategories)
 
 
 

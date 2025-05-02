@@ -103,26 +103,28 @@ const getProductBySubcategory = async (req, res) => {
   }
 };
 
-const getProductByCompanyId = async (req, res) => {
-  try {
-    const {companyId} =req.params
-    const product = await Product.find({companyId})
-      .populate('companyId','companyName')
-      .populate('categoryId','catName')
-      .populate('subcategoryId','subCategoryName');
+// const getProductByCompanyId = async (req, res) => {
+//   try {
+//     const {companyId} =req.params
+//     const product = await Product.find({companyId})
+//       .populate('companyId','companyName')
+//       .populate('categoryId','catName')
+//       .populate('subcategoryId','subCategoryName');
 
-    if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
+//     if (!product) return res.status(404).json({ success: false, message: 'Product not found' });
 
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
+//     res.status(200).json(product);
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
 
 
 
 // Update product
- const updateProduct = async (req, res) => {
+ 
+
+const updateProduct = async (req, res) => {
   try {
     const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ success: false, message: 'Product not found' });
@@ -189,7 +191,7 @@ export default{
     updateProduct,
     deleteProduct,
     getProductBySubcategory,
-    getProductByCompanyId,
+    // getProductByCompanyId,
     getTopDealsProducts,
     getProductsByCompanyWithSubcategories
 }
