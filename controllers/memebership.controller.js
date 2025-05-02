@@ -1,24 +1,63 @@
-import Membership from '../models/Membership.js';
+import Membership from '../models/membership.model.js'
 
-// Create Membership
 const createMembership = async (req, res) => {
   try {
-    const membership = await Membership.create(req.body);
-    res.status(201).json({ success: true, membership });
+    const { name,price,billingCycle,benefits} = req.body;
+
+    const membership = await Membership.create({
+      name,
+      price,
+      billingCycle,
+      benefits: {
+        virtualAddress: benefits.virtualAddress,
+        consolidation: benefits.consolidation,
+        shippingDiscount: benefits.shippingDiscount,
+        personalShopper: benefits.personalShopper,
+        photo: benefits.photo,
+        additionalPhoto: benefits.additionalPhoto,
+        storage: benefits.storage,
+        liquidClearanceCharge: benefits.liquidClearanceCharge,
+        packageReturn: benefits.packageReturn,
+        pickupFromWarehouse: benefits.pickupFromWarehouse,
+      },
+    });
+
+    res.status(201).json({ data:membership });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
 };
 
+
 // Get All Memberships
 const getAllMemberships = async (req, res) => {
   try {
     const memberships = await Membership.find();
-    res.status(200).json({ success: true, memberships });
+
+    if (!memberships) {
+        return res.status(404).json({ success: false, message: 'Membership not found' });
+      }
+
+    res.status(200).json(memberships);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+//  Get Membership by Id
+const getMembershipsById = async (req, res) => {
+    try {
+      const membership = await Membership.findById(req.params.id);
+  
+      if (!membership) {
+          return res.status(404).json({ success: false, message: 'Membership not found' });
+        }
+  
+      res.status(200).json(membership);
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
 
 // Update Membership by ID
 const updateMembership = async (req, res) => {
@@ -50,5 +89,6 @@ export default {
   createMembership,
   getAllMemberships,
   updateMembership,
-  deleteMembership
+  deleteMembership,
+  getMembershipsById
 };

@@ -5,6 +5,8 @@ const createCompany = async (req, res) => {
     const {
       countryId,
       dealType,
+      address,
+      pincode,
       companyName,
       companyType,
       companyUrl,
@@ -22,6 +24,8 @@ const createCompany = async (req, res) => {
     const newCompany = new Company({
       countryId,
       dealType,
+      address,
+      pincode,
       companyName,
       image,
       companyType,

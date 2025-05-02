@@ -9,7 +9,7 @@ const membershipSchema = new mongoose.Schema({
   price: Number, // in ₹, 0 for BASIC
   billingCycle: {
     type: String,
-    enum: ['Annual', 'Half-Yearly', 'Free'],
+    enum: ['Annual', 'HalfYearly', 'Free'],
     default: 'Free'
   },
   benefits: {

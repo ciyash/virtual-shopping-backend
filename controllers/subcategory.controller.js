@@ -10,7 +10,7 @@ const generateSubCatUniqueId = () => {
 // Create Subcategory
 const createSubcategory = async (req, res) => {
   try {
-    const { categoryId, subCategoryName } = req.body;
+    const { categoryId,companyId, subCategoryName } = req.body;
     const image = req.file?.location;
 
     if (!image) {
@@ -21,6 +21,7 @@ const createSubcategory = async (req, res) => {
 
     const newSubcategory = new Subcategory({
       image,
+      companyId,
       categoryId,
       subCategoryName,
       subCatUniqueId,
@@ -85,9 +86,10 @@ const getSubcategoryByCategoryId = async (req, res) => {
 // Update Subcategory
 const updateSubcategory = async (req, res) => {
   try {
-    const { subCategoryName, categoryId } = req.body;
+    const { subCategoryName,companyId, categoryId } = req.body;
     let updateData = {
       subCategoryName,
+      companyId,
       categoryId,
     };
 
@@ -123,11 +125,35 @@ const deleteSubcategory = async (req, res) => {
   }
 };
 
+const getSubcategoryByCompanyId = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+
+    const subcategories = await Subcategory.find({ companyId })
+      .populate("companyId", "companyName") // adjust the field as per your Company schema
+      .populate("categoryId", "catName");
+
+    if (!subcategories || subcategories.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No subcategories found for this company" });
+    }
+
+    return res.status(200).json(subcategories);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: error.message });
+  }
+};
+
+
 export default {
   createSubcategory,
   getAllSubcategories,
   getSubcategoryById,
   updateSubcategory,
   deleteSubcategory,
-  getSubcategoryByCategoryId
+  getSubcategoryByCategoryId,
+  getSubcategoryByCompanyId
 };

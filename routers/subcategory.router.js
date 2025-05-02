@@ -7,11 +7,13 @@ const router = express.Router();
   
 const uploadImage = getUpload('subcategory');  
 
-router.post('/create', authMiddleware,uploadImage.single('image'),subcategoryController.createSubcategory);
+router.post('/create',uploadImage.single('image'),subcategoryController.createSubcategory);
 
 router.get('/get',subcategoryController.getAllSubcategories);
 
 router.get('/categoryId/:categoryId',subcategoryController.getSubcategoryByCategoryId)
+
+router.get('/companyId/:companyId',subcategoryController.getSubcategoryByCompanyId)
 
 router.get('/:id',subcategoryController.getSubcategoryById);
 
