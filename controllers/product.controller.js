@@ -50,7 +50,7 @@ const generateProductUniqueId = async () => {
     });
 
     const saved = await newProduct.save();
-    res.status(201).json({ data: saved });
+    res.status(201).json({message:"product data added successfully", data: saved });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
