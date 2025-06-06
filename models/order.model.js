@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
 
-const cartSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-
     items: [
       {
         productId: {
@@ -19,15 +18,8 @@ const cartSchema = new mongoose.Schema(
           type: Number,
           default: 1,
         },
-        size: {
-          type: String,
-          default: "0",
-        },
-
-        color: {
-          type: String,
-          default: "",
-        },
+        size: { type: String },
+        color: { type: String },
         price: {
           type: Number,
           required: true,
@@ -37,18 +29,40 @@ const cartSchema = new mongoose.Schema(
         },
       },
     ],
-
-    totalAmount: {
+    subTotal: {
       type: Number,
       required: true,
     },
-
+    charges: {
+      type: Number,
+      default: 0,
+    },
+    total: {
+      type: Number,
+      required: true,
+    },
     addressId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Address",
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"],
+      default: "Pending",
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["COD", "Online"],
+      default: "COD",
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["Pending", "Paid", "Failed"],
+      default: "Pending",
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("Cart", cartSchema);
+export default mongoose.model("Order", orderSchema);

@@ -15,7 +15,8 @@ import productCategory from '../routers/product.category.router.js'
 import bannersRouter from '../routers/banners.router.js'
 import logoRouter from '../routers/logo.router.js'
 import memberShipRouter from '../routers/membership.router.js'
-
+import orderRouter from '../routers/order.router.js'
+import userAddressRouter from '../routers/user.address.router.js'
 
 const app=express()
 app.use("/admin",adminRouter)
@@ -34,5 +35,6 @@ app.use("/product-category",productCategory)
 app.use("/banners",bannersRouter)
 app.use("/logo",logoRouter)
 app.use("/membership",memberShipRouter)
-
+app.use("/order",orderRouter)
+app.use("/user-address",userAddressRouter)
 export default app

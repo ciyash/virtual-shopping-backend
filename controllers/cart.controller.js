@@ -1,42 +1,52 @@
 import Cart from '../models/cart.model.js';
 
- const createCartItem = async (req, res) => {
-    try {
-      const {
-        product,
-        subTotal,
-        addressId,
-        charges,
-        total,
-        quantity,
-        price
-      } = req.body;
-  
-      const cartItem = new Cart({
-        userId:req.user.id,
-        product,
-        subTotal,
-        addressId,
-        charges,
-        total,
-        quantity,
-        price
-      });
-  
-      await cartItem.save();
-  
-      res.status(201).json({
-        message: 'Cart item created',
-        data: cartItem
-      });
-    } catch (error) {
-      res.status(500).json({
-        message: 'Error creating cart item',
-        error: error.message
-      });
-    }
-  };
-  
+const createCartItem = async (req, res) => {
+  try {
+    const {
+      productId,
+      quantity,
+      size,
+      color,
+      price,
+      offerPrice,
+      subTotal,
+      addressId,
+      charges,
+      total,
+    } = req.body;
+
+    const cartItem = new Cart({
+      userId: req.user.id,
+      items: [
+        {
+          productId,
+          quantity,
+          size,
+          color,
+          price,
+          offerPrice,
+        },
+      ],
+      subTotal,
+      addressId,
+      charges,
+      total,
+    });
+
+    await cartItem.save();
+
+    res.status(201).json({
+      message: 'Cart item created',
+      data: cartItem,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error creating cart item',
+      error: error.message,
+    });
+  }
+};
+
 
   const getCartItemsByUserId = async (req, res) => {
     try {

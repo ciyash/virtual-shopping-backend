@@ -4,7 +4,7 @@ import authMiddleware from '../config/jwt.middleware.js';
 
 const router = express.Router();
 
-router.post('/', authMiddleware,cartController.createCartItem);
+router.post('/create', authMiddleware,cartController.createCartItem);
 router.get('/user-cart', authMiddleware,cartController.getCartItemsByUserId);
 router.patch('/:id', cartController.updateCartItem);
 router.delete('/:id', authMiddleware,cartController.deleteCartItem);
